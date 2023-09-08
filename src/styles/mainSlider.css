@@ -1,0 +1,87 @@
+
+
+.SliderContainer{
+    width:800px;
+    height:560px;
+    margin: 20px 10px 0px 50px;
+}
+
+.Title{
+    color: #000a80;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.SliderSection{
+    width: inherit;
+    height: inherit;
+}
+
+.SlideImage{
+    object-fit: cover;
+}
+
+.custom-slick-dots {
+    bottom: 60px !important;
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.custom-slick-dots li {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.custom-slick-dots li button{
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: transparent;
+}
+
+.custom-slick-dots li button:before {
+    font-family: 'slick';
+    font-size: 6px;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    -webkit-font-smoothing: antialiased;
+
+    background: #ebeaf0;
+    color: #797f94;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.custom-slick-dots li.slick-active button:before {
+    opacity: .75;
+    color:green;
+}
+
+.slick-dots li button:before {
+    color: gray;
+}
