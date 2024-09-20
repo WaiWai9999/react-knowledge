@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@lingui/react": ["node_modules/@lingui/react"],
+      "@lingui/core": ["node_modules/@lingui/core"]
+    },
     "target": "es5",
     "lib": [
       "dom",

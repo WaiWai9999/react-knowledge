@@ -7,6 +7,8 @@ import MuiDataGridTextbox from "./MuiDataGridTextbox";
 import EditableGrid from "./EditableGrid";
 import Slider from "./MainSlider";
 import MuiChart from "./MuiChart";
+import MuiDatePicker from "./MuiDatePicker";
+import MultiLanguages from "./MultiLanguages";
 import Recharts from "./Recharts";
 import "../App.css";
 import styled from "styled-components";
@@ -56,6 +58,12 @@ const App = () => {
           <li>
             <Link to="/Recharts">Recharts</Link>
           </li>
+          <li>
+            <Link to="/MuiDatePicker">MuiDatePicker</Link>
+          </li>
+          <li>
+            <Link to="/MultiLanguages">MultiLanguages</Link>
+          </li>
         </ul>
       </Nav>
       <Routes>
@@ -71,6 +79,8 @@ const App = () => {
         <Route path="/EditableGrid" element={<EditableGrid />} />
         <Route path="/MuiChart" element={<MuiChart />} />
         <Route path="/Recharts" element={<Recharts />} />
+        <Route path="/MuiDatePicker" element={<MuiDatePicker />} />
+        <Route path="/MultiLanguages" element={<MultiLanguages />} />
       </Routes>
     </Router>
   );

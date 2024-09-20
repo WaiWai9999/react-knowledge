@@ -11,7 +11,32 @@ import {
   Area,
   BarChart,
   Bar,
+  PieChart,
+  Pie,
+  Text,
 } from "recharts";
+
+// PieChart 用のサンプルデータ
+const pieData01 = [
+  { categoryName: "Category A", value: 400 },
+  { categoryName: "Category B", value: 300 },
+  { categoryName: "Category C", value: 300 },
+  { categoryName: "Category D", value: 200 },
+];
+
+const pieData02 = [
+  { typeName: "A1", value: 100 },
+  { typeName: "A2", value: 300 },
+  { typeName: "B1", value: 100 },
+  { typeName: "B2", value: 80 },
+  { typeName: "B3", value: 40 },
+  { typeName: "B4", value: 30 },
+  { typeName: "B5", value: 50 },
+  { typeName: "C1", value: 100 },
+  { typeName: "C2", value: 200 },
+  { typeName: "D1", value: 150 },
+  { typeName: "D2", value: 50 },
+];
 
 //LineChart 用のサンプルデータ
 const data = [
@@ -129,6 +154,93 @@ const rangeData = [
     temperature: [-2, 5],
   },
 ];
+
+const RADIAN = Math.PI / 180;
+// 円グラフの内側ラベルをカスタマイズする関数
+const renderCustomizedInnerLabel: React.FunctionComponent<{
+  cx: number;
+  cy: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+  index: number;
+  categoryName: string;
+}> = ({ cx, cy, midAngle, innerRadius, outerRadius, categoryName }) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN) - 30;
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor="central"
+      dominantBaseline="central"
+    >
+      {`${categoryName}`}
+    </text>
+  );
+};
+
+// 円グラフの外側ラベルをカスタマイズする関数
+const renderCustomizedOuterLabel: React.FunctionComponent<{
+  cx: number;
+  cy: number;
+  x: number;
+  y: number;
+  midAngle: number;
+  innerRadius: number;
+  outerRadius: number;
+  percent: number;
+  index: number;
+  typeName: string;
+  value: number;
+}> = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  typeName,
+  value,
+  x,
+  y,
+}) => {
+  const textAnchor = x > cx ? "start" : "end";
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const nameX = cx + radius * Math.cos(-midAngle * RADIAN);
+  const nameY = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <>
+      <Text
+        x={nameX}
+        y={nameY}
+        fill="white"
+        // テキストの水平位置を設定
+        textAnchor="middle"
+        // テキストの垂直位置を設定
+        dominantBaseline="middle"
+      >
+        {`${typeName}`}
+      </Text>
+      <Text
+        // X、Y 座標を微調整
+        x={x - 2}
+        y={y - 10}
+        // テキストの水平位置を設定
+        textAnchor={textAnchor}
+        // テキストの垂直位置を設定
+        dominantBaseline="hanging"
+        fill="#82ca9d"
+      >
+        {value}
+      </Text>
+    </>
+  );
+};
 
 export default function Recharts() {
   return (
@@ -442,6 +554,51 @@ export default function Recharts() {
         <Tooltip />
         <Bar dataKey="temperature" fill="#8884d8" />
       </BarChart>
+      <br />
+      <br />
+      <PieChart width={400} height={400}>
+        <Pie
+          data={pieData01}
+          dataKey="value"
+          cx="50%"
+          cy="50%"
+          outerRadius={60}
+          fill="#8884d8"
+        />
+        <Pie
+          data={pieData02}
+          dataKey="value"
+          cx="50%"
+          cy="50%"
+          innerRadius={70}
+          outerRadius={90}
+          fill="#82ca9d"
+          label
+        />
+      </PieChart>
+      <br />
+      <br />
+      <PieChart width={600} height={600}>
+        <Pie
+          data={pieData01}
+          dataKey="value"
+          cx="50%"
+          cy="50%"
+          outerRadius={120}
+          fill="#8884d8"
+          label={renderCustomizedInnerLabel}
+        />
+        <Pie
+          data={pieData02}
+          dataKey="value"
+          cx="50%"
+          cy="50%"
+          innerRadius={130}
+          outerRadius={180}
+          fill="#82ca9d"
+          label={renderCustomizedOuterLabel}
+        />
+      </PieChart>
     </div>
   );
 }
